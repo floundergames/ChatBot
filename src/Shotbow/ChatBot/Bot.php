@@ -85,6 +85,7 @@ class Shotbow_ChatBot_Bot
     {
         $try = [
             [$this, 'special_mew'],
+            [$this, 'k']
         ];
 
         $processed = false;
@@ -121,6 +122,24 @@ class Shotbow_ChatBot_Bot
                 'あなた、猫ですか?!',
             ];
             $message = $possibleResults[rand(0, count($possibleResults) - 1)];
+            $this->postMessage($message);
+
+            return true;
+        }
+
+        return false;
+    }
+    
+    private function okay(Shotbow_ChatBot_User $sender, $message)
+    {
+        $searchString = 'k';
+        if (in_array($sender->getId(), [328387])
+            && strtolower(substr($message, 0, strlen($searchString))) == $searchString
+        ) {
+            $possibleResults = [
+                'K.',
+            ];
+            $message = $possibleResults[0];
             $this->postMessage($message);
 
             return true;
